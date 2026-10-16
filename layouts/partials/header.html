@@ -1,0 +1,10 @@
+<header class="site-header">
+    <div class="header-inner" id="site-header-inner">
+        <a class="site-name" id="site-name" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+        <nav class="site-nav" aria-label="main navigation">
+            <a href="{{ site.Home.RelPermalink }}">posts</a>
+            <a href="{{ "about/" | relURL }}">about</a>
+        </nav>
+        <canvas class="snake-canvas" id="snake-canvas" aria-label="snake easter egg"></canvas>
+    </div>
+</header>

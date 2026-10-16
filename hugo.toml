@@ -1,0 +1,32 @@
+baseURL = 'https://arckmed.github.io/'
+locale = 'en-US'
+title = 'Arckmed'
+enableRobotsTXT = true
+disableKinds = ['RSS', 'taxonomy', 'term']
+enableGitInfo = false
+
+[pagination]
+  pagerSize = 8
+
+[params]
+  description = 'my personal blog, mostly about reverse engineering, program analysis, compilers, and low-level notes'
+  author = 'Arckmed'
+  codeTheme = 'vs2022-dark' # options: 'vs2022-dark', 'dracula'
+
+[permalinks]
+  posts = '/:year/:month/:slug/'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+    noClasses = false
+    tabWidth = 4
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'

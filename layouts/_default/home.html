@@ -1,0 +1,34 @@
+{{ define "main" }}
+<section class="intro">
+    <div class="intro-mark">
+        <svg class="intro-et intro-alien" viewBox="0 0 16 16" aria-hidden="true" focusable="false" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div class="intro-copy">
+        <h1>Looking closer at how things work.</h1>
+        <p>Reverse engineering &middot; program analysis &middot; low-level notes &middot; and other curiosities</p>
+    </div>
+</section>
+
+<section class="post-feed">
+    {{ $pages := where site.RegularPages "Section" "posts" }}
+    {{ $paginator := .Paginate $pages }}
+    {{ range $paginator.Pages }}
+    <article class="post-preview">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <div class="post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+        </div>
+        <div class="post-summary">{{ .Summary }}</div>
+        <a class="read-more" href="{{ .RelPermalink }}">read more →</a>
+    </article>
+    {{ end }}
+
+    {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pagination" aria-label="pagination">
+        {{ with $paginator.Prev }}<a href="{{ .URL }}">← newer</a>{{ end }}
+        <span>page {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+        {{ with $paginator.Next }}<a href="{{ .URL }}">older →</a>{{ end }}
+    </nav>
+    {{ end }}
+</section>
+{{ end }}

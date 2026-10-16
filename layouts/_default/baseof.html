@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode | default "en" }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+    <link rel="icon" href="{{ "images/favicon.svg" | relURL }}" type="image/svg+xml">
+    <style>
+        .site-name { font-size: 1.5rem; }
+    </style>
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+{{- $codeTheme := site.Params.codeTheme | default "dracula" -}}
+{{- if not (in (slice "vs2022-dark" "dracula") $codeTheme) -}}
+    {{- $codeTheme = "dracula" -}}
+{{- end -}}
+<body class="code-theme-{{ $codeTheme }}">
+    {{ partial "header.html" . }}
+    <main class="site-main{{ if .Params.cityFooter }} about-main{{ end }}">
+        {{ block "main" . }}{{ end }}
+        {{ if .Params.cityFooter }}
+        <div class="about-city" aria-hidden="true">
+            {{ readFile "static/images/about-city.svg" | safeHTML }}
+            <canvas class="city-activity" width="960" height="320"></canvas>
+        </div>
+        {{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+    <script src="{{ "js/copy.js" | relURL }}" defer></script>
+    <script src="{{ "js/games.js" | relURL }}" defer></script>
+    <script src="{{ "js/alien.js" | relURL }}" defer></script>
+    {{ if .Params.cityFooter }}
+    <script src="{{ "js/city.js" | relURL }}" defer></script>
+    {{ end }}
+</body>
+</html>
